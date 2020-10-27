@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_27_235150) do
+ActiveRecord::Schema.define(version: 2020_10_27_235609) do
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer "doctor_id", null: false
+    t.integer "patient_id", null: false
+    t.string "location"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+  end
 
   create_table "doctors", force: :cascade do |t|
     t.string "name"
@@ -41,5 +53,7 @@ ActiveRecord::Schema.define(version: 2020_10_27_235150) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "doctors"
+  add_foreign_key "appointments", "patients"
   add_foreign_key "patients", "users"
 end
