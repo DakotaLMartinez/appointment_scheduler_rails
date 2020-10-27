@@ -57,6 +57,23 @@ in your appointments#index action, you could accept a query parameter for time a
 ## What does the schema for our app look like?
 
 ```rb
+# table migration for: users 
+# t.string :email
+# t.string :phone_number
+
+
+class User 
+  # relationships
+  has_many :patients
+  has_many :appointments, through: :patients
+  
+	# validations 
+  validates :email, :phone_number, presence: true, uniqueness: true
+  
+	# scope_methods (if any)
+
+
+end
 # table migration for: doctors 
 # t.string :name
 # t.string :phone_number
@@ -102,6 +119,7 @@ class Appointment
        # relationships
   belongs_to :doctor
   belongs_to :patient
+  delegate :user, to: :patient
 
 	# validations 
   validates :doctor_id, :patient_id, :start_time, :end_time, :location, presence: true
