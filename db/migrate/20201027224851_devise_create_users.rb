@@ -9,11 +9,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :phone_number
 
       ## Recoverable
-      # t.string   :reset_password_token
-      # t.datetime :reset_password_sent_at
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
 
-      # ## Rememberable
-      # t.datetime :remember_created_at
+      ## Rememberable
+      t.datetime :remember_created_at
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
