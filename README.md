@@ -130,16 +130,5 @@ class Appointment
   # Appointment.upcoming => appointments that haven't started yet.
 
 end
-# table migration for: users
-# t.string :email 
-# t.string :password_digest
-class User 
-  # relationships 
-  has_many :patients 
-  has_many :doctors, through: :patients 
-  has_many :appointments, through: :patients
-  # validations 
 
-  
-end
 ```
