@@ -132,3 +132,14 @@ class Appointment
 end
 
 ```
+# Day 1:
+
+Build out Authentication, Models, schema, associations & validations.
+
+# Day 2:
+
+- Build out our index views for all resources
+- Build nested routes
+- Add forms for creating and ediitng existing resources
+- Display error messages for failed validations
+- Add scope methods and user interface for viewing their return values.

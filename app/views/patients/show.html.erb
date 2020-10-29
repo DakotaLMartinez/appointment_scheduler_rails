@@ -1,0 +1,6 @@
+<h1><%= @patient.name %></h1>
+<p><%= link_to  "Edit Patient", edit_patient_path(@patient) %>
+<%= form_tag(patient_path(@patient), method: :delete) do%>
+<%= submit_tag "Delete Patient" %>
+<% end %>
+</p>
