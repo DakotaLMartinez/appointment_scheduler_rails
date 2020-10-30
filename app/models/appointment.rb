@@ -3,7 +3,8 @@ class Appointment < ApplicationRecord
   belongs_to :patient
 
   validates :start_time, :end_time, :location, presence: true
-  validate :doctor_double_booked, :patient_double_booked, :ends_after_it_starts
+  validate :doctor_double_booked, :patient_double_booked, if: :starts_before_it_ends?
+  validate :ends_after_it_starts
   # what does it mean for a double booking to exist. What conditions mean that a doctor or a patient is double booked?
   # if the doctor has any appointment that:
   #   starts in the middle of this appointment (other_appt.start_time < this_appt.start_time && thor ends in the middle of this appointment then it's a double booking on the doctor's part
@@ -37,9 +38,21 @@ class Appointment < ApplicationRecord
   end
 
   def ends_after_it_starts
-    if start_time > end_time
+    if !starts_before_it_ends?
       errors.add(:start_time, 'must be before the end time')
     end
+  end
+
+  def starts_before_it_ends?
+    start_time < end_time
+  end
+
+  def doctor_name 
+    self.doctor.name
+  end
+
+  def patient_name 
+    self.patient.name
   end
 
 end
