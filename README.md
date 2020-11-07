@@ -240,3 +240,23 @@ end
 ```rb
 devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 ```
+
+# To Dos:
+Add appointment_count to Doctor and Patient and then implement a counter_cache on the belongs to relationships for Appointment so that the appointment_count counters are updated for the doctor and the patient when a new appointment is created. This will allow additional scope method based on how many associated records there are. As an example, you would be able to sort Doctors by how many appointments they have in descending order to indicate something like popularity of a doctor. The method that would order the Doctors by appointment_count would be a scope method.
+
+``` 
+class Appointment
+  belongs_to :doctor, counter_cache: true
+  belongs_to :appointment, counter_cache: true
+end
+```
+
+```
+class Doctor 
+  def self.popular
+    order(appointment_count: :desc)
+  end
+end
+```
+
+Also, we need to add the logic to the doctors controller that displays the patients related to a single doctor (we added the nested route but not the controller logic or links that actually put it to use!)
