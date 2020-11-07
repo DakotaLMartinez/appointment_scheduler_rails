@@ -1,0 +1,21 @@
+<table>
+<thead>
+  <tr>
+    <th>Patient</th>
+    <th>Location</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+  </tr>
+</thead>
+<tbody>
+
+  <% @appointments.each do |appointment| %>
+    <tr>
+      <td><%= appointment.patient_name %></td>
+      <td><%= appointment.location %></td>
+      <td><%= appointment.start_time %></td>
+      <td><%= appointment.end_time %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

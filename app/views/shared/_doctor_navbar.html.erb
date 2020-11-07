@@ -1,0 +1,8 @@
+<nav>
+  <%= link_to "Appointments", doctor_root_path %>
+  <%= link_to "Patients", doctor_patients_path %>
+
+  <%= form_tag(destroy_user_session_path, method: :delete, style: 'display: inline-block;') do %>
+    <%= submit_tag "Sign Out" %>
+  <% end %>
+</nav>
