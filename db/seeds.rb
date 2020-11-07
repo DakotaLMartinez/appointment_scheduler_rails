@@ -11,8 +11,19 @@ user = User.first_or_create(email: "test@test.com", password: "password", phone_
 p1 = user.patients.find_or_create_by(name: "Samantha")
 p2 = user.patients.find_or_create_by(name: "Patrick")
 
-d1 = Doctor.find_or_create_by(name: "Dr. Drew", phone_number: "555-555-5555", specializations: "Celebrities")
-d2 = Doctor.find_or_create_by(name: "Dr. Zhivago", phone_number: "111-232-5738", specializations: "Weathering the Cold")
+d1 = Doctor.find_or_create_by(email: "doctor@drew.com") do |d|
+  d.password = "pickme"
+  d.name = "Dr. Drew"
+  d.phone_number = "555-555-5555"
+  d.specializations = "Celebrities"
+end
+d2 = Doctor.find_or_create_by(email: "doctor@zhivago.com") do |d|
+  d.password = "nopickme!"
+  d.name = "Dr. Zhivago"
+  d.phone_number = "111-232-5738"
+  d.specializations = "Weathering the Cold"
+end
+
 
 10.times do 
   doctor = [d1, d2].sample

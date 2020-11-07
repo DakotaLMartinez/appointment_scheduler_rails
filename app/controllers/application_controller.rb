@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:phone_number])
   end
+
+  def devise_parameter_sanitizer
+    if resource_class == Doctor
+      Doctor::ParameterSanitizer.new(Doctor, :doctor, params)
+    else
+      super # Use the default one
+    end
+  end
 end
