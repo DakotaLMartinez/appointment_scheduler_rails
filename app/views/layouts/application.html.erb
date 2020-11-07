@@ -10,9 +10,12 @@
   </head>
 
   <body>
-    <%= render partial: 'shared/navbar' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <% if request.env['warden'].user.class.name == 'Doctor'%>
+    <%= render partial: 'shared/doctor_navbar' %>
+  <% else %>
+    <%= render partial: 'shared/user_navbar' %>
+  <% end %>
+    
     <% flash.each do |name, msg| -%>
       <%= content_tag :div, msg, class: name %>
     <% end -%>
